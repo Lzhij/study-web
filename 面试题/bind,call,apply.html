@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <script>
+    const obj = {
+      name: 'zs'
+    }
+
+    function hehe(num1, num2, num3) {
+      console.log(this, Array.from(arguments))
+    }
+
+    // call 方法的实现
+    Function.prototype.myCall = function () {
+      if (!this instanceof Function) throw new Error('this is not a function')
+      // 拿到需要改变指向的函数
+      const targetFn = this
+      // 判断目标是否为空
+      const target = arguments[0] || window
+      // 获取剩余参数
+      const args = Array.from(arguments).slice(1)
+      // 给目标对象添加这个方法  方法中的this就会指向目标对象了
+      target.hehe = targetFn
+      target.hehe(...args)
+
+      // 删除对象上的这个方法
+      delete target.fn
+    }
+
+    // hehe.myCall(obj, 1, 2, 3)
+
+    // apply方法的实现  基本差不多
+    Function.prototype.myApply = function () {
+      if (!this instanceof Function) throw new Error('this is not a function')
+      const targetFn = this
+      const target = arguments[0] || window
+      const arr = arguments[1]
+      target.hehe = targetFn
+      target.hehe(...arr)
+      delete target.hehe
+    }
+
+    // hehe.myApply(obj, [1, 2, 3])
+
+    // bind方法的实现 
+    // bind方法需要做数据柯里化
+    Function.prototype.myBind = function () {
+      if (!this instanceof Function) throw new Error('this is not a function')
+      const targetFn = this
+      const target = arguments[0] || window
+      const args = Array.from(arguments).slice(1)
+      function backFn(...arr) {
+        // 这里接受的 arr 是后面 bind 调用时传递的参数
+        // 通过与之前的参数进行合并 得到一个具有全部数据的数组 
+        // 在调用之前设置好的 apply 方法即可
+        const newArg = [...args, ...arr]
+        // 这里通过
+        targetFn.myApply(target, newArg)
+      }
+
+      return backFn
+    }
+
+    hehe.myBind(obj, 1, 2, 3)
+    
+    </script>
+</body>
+
+</html>
