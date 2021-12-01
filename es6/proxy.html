@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <script>
+    const o = {
+      name: 'zs'
+    }
+    
+    // 创建一个代理器， 第一个参数时要拦截的对象   第二个参数时拦截的配置
+    const obj = new Proxy(o, {
+      get(target, propKey, receiver) {
+        // get方法接受的三个参数分别时目标对象， 对象的key值， proxy本身
+        console.log(target, propKey, receiver)
+        return target[propKey]
+      },
+      set(target, propKey, value, receiver) {
+        // set方法接受的四个参数分别为 目标对象   设置属性的key   设置的值   proxy对象本身
+        console.log(arguments)
+        target[propKey] = value
+      }
+    })
+
+    obj.name = '15623'
+
+    console.log(obj.name)
+  </script>
+</body>
+
+</html>
