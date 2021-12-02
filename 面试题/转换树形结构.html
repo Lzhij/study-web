@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+
+  <script>
+    const obj = [
+        { id: '1', name: '上海', pid: '' },
+        { id: '2', name: '深圳', pid: '' },
+        { id: '3', name: '长沙', pid: '' },
+        { id: '4', name: '开福', pid: '3' },
+        { id: '5', name: '福田', pid: '2' },
+        { id: '6', name: '岳麓', pid: '3' },
+        { id: '7', name: '南山', pid: '2' },
+        { id: '8', name: '高新', pid: '6' },
+        { id: '9', name: '开福区政府', pid: '4' },
+        { id: '10', name: '开福区政府', pid: '9' },
+      { id: '11', name: '开福区政府', pid: '10' },
+      ]
+
+      function toKeyData(data, key) {
+        const keyData = {}
+        data.forEach(item => {
+          if (keyData[item[key]]) {
+            keyData[item[key]].push(item)
+          } else {
+            keyData[item[key]] = [item]
+          }
+        })
+
+        data.forEach(item => {
+          if (keyData[item.id]) {
+            item.children = keyData[item.id]
+          }
+        })
+        return keyData['']
+      }
+
+      const keys = toKeyData(obj, 'pid')
+      console.log(keys)
+  </script>
+</body>
+</html>
