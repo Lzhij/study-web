@@ -25,20 +25,48 @@
       ]
 
       function toKeyData(data, key) {
+        // 创建一个分组对象 用来存储分好组的相同 pid 的对象集合的数组
         const keyData = {}
+
+        // 第一次遍历
         data.forEach(item => {
-          if (keyData[item[key]]) {
-            keyData[item[key]].push(item)
+          // if 这个判读就是在判断  keyData[''] 是否为空
+          //  item[key] = item.pid = '' 
+          if (!keyData[item[key]]) {
+            // 假如为空走这里
+            // 这里我们keyData这个对象 的 ''(当前遍历对象的pid) 键名赋值一个数组  并且将当前遍历对象放到被赋值的这个数组里
+             keyData[item[key]] = [item]
           } else {
-            keyData[item[key]] = [item]
+            // 不为空说明有至少一个以上
+            // 我们只需要给 keyData 对象的 当前遍历对象的pid 添加上当前对象即可
+           keyData[item[key]].push(item)
           }
         })
+        // keyData : {
+            // "2":Array[2],
+            // "3":Array[2],
+            // "4":Array[1],
+            // "6":Array[1],
+            // "9":Array[1],
+            // "10":Array[1],
+            // "":Array[3]
+        //  }
 
+
+        // 这是第二轮的遍历
+        // 我们主要要处理的就是内存的指向
         data.forEach(item => {
+          // 假如keyData对象中有 当前遍历对象 id 的键就说明
+          // 有其他数据的 pid 指向当前 对象的id  
+          // 那么在前面一步我们已经将 pid 相同的对象分好组了
           if (keyData[item.id]) {
+            // 我们只需要将 keyData中和当前 对象id 相同键名的数组赋值给 当前id的对象就行
+            // 由于遍历的对象没有改变指向， 只要当前这个对象多了children  其他地方存储的也会相应的改变
             item.children = keyData[item.id]
           }
         })
+
+        // 我们最后把根 pid 键名的返回出去即可 
         return keyData['']
       }
 

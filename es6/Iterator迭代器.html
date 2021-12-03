@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // Iterator
+    // 是 es 6 一种新的遍历机制
+    // 迭代器是一个接口 ， 能快捷的访问数据 ， 通过 Symbol.iterator 来创建迭代器
+    // 迭代器用来提供遍历数据的指针
+
+
+    // 迭代器的使用
+    let arr = ['one', 'two', 'three']
+    const ite = arr[Symbol.iterator]()
+    console.log(ite.next()) // {value: 'one', done: false} value表示当前遍历项的值  done 表示是否遍历完成
+    console.log(ite.next())
+    console.log(ite.next())
+    console.log(ite.next()) // {value: undefined, done: true} done为 true 表示遍历完成
+  </script>
+</body>
+</html>

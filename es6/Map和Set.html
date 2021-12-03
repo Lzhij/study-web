@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Set： 集合  没有重复数据的有序列表
+      // let s = new Set()
+
+      // s.add('1')
+      // s.add('12')
+      // let obj = { name: '1' }
+      // s.add(obj)
+      // // set中引用的对象无法被释放
+      // obj = null
+      // s.delete('1')
+      // console.log(s)
+      // s.forEach((v, k) => {
+      //   // set集合在遍历时   key和值是一样的
+      //   console.log(v, k)
+      // })
+
+      // for (var i of s) {
+      //   console.log(i)
+      // }
+
+      // Map 是键值对的有序列表  键和值都可以是任意类型
+      // let m = new Map()
+      // m.set('name', 'zs')
+      // m.set([1, [2]], 'zs')
+      // console.log(m.get('name'))
+      // console.log(m.has('name'))
+      // m.delete('name')
+      // console.log(m)
+      // m.clear()
+      // console.log(m)
+
+      let m = new Map([
+        ['name', 'tkk'],
+        [['age'], 18]
+      ])
+      // console.log(m)
+      // m.forEach((v, k) => {
+      //   console.log(v, k)
+      // })
+      // for (var [v,k] of m.entries()) {
+      //   console.log(v, k)
+      // }
+    </script>
+  </body>
+</html>

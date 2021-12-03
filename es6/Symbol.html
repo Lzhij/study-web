@@ -1,20 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
+  <body>
+    <script>
 
-<body>
+      // 通常Symbol()表示一个唯一的值
+      // 偶尔会被使用为对象的私有属性
+      const s1 = Symbol('name')
+      const s2 = Symbol('name')
+      const obj = {}
+      obj[s1] = 'tkk'
+      // console.log(obj[s1])
 
 
-  <script>
+      // 使用Symbol作为键的话  是不能通过遍历得到的  只能使用存储的变量作为键名来获取
+      // for(var k in obj) {
+      //   console.log(k)
+      // }
+      // console.log(Object.keys(obj))
 
-    
-  </script>
-</body>
-
+      // 如果想要获取Symbol()声明的属性  可以使用下面的方法
+      // const key = Object.getOwnPropertySymbols(obj)
+      const key = Reflect.ownKeys(obj)
+      console.log(key)
+    </script>
+  </body>
 </html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // generator 函数可以通过 yield 关键字 将函数挂起 为了改变执行流提供了可能， 同时为了异步编程提供了方法
+      // generator 函数必须在 function 关键字后 函数名前 加上 * 号
+      // 只能在 generator 函数中使用 yield 关键字  表示将当前函数挂起
+
+      // 示例 1.
+      // generator 函数默认就是挂起/暂停状态
+      // function* hehe() {
+      //   console.log(1)
+      //   yield { name: 1 }
+
+      //   console.log(2)
+      //   yield function dada() {
+      //     console.log(this)
+      //   }
+
+      //   console.log(3)
+      //   yield 3
+
+      //   console.log(4)
+      // }
+
+      // generator 生成器返回一个遍历器 可以调用原型链上的 next 方法
+      // let ite = hehe()
+      // 当调用 next() 方法后会开始执行 generator 函数 直到碰到下一个 yield 就会继续暂停
+      // 并且返回一个对象 {value: {…}, done: false} value是 yield 后面的内容 done表示是否执行结束
+      // console.log(ite.next())
+      // console.log(ite.next())
+      // console.log(ite.next())
+      // console.log(ite.next())
+
+
+
+      // 示例 2.
+      // function* func() {
+      //   console.log('start')
+      //   let x = yield 'a' // 此处 x 并不会成为 {value: 'a', done: false} 而是会成为下一次 next() 调用中传递过来的参数
+      //   console.log('x: ', x)
+      //   let y = yield 'b'
+      //   console.log('y: ', y)
+      //   return x + y
+      // }
+
+      // let ite = func()
+      // console.log(ite)
+      // console.log(ite.next()) // {value: 'a', done: false}
+      // console.log(ite.next(20)) // 此处传递的 20 会成为 上面函数中 x 的值  {value: 'b', done: false}
+      // console.log(ite.next(30)) // 同理此处为 y 的值   {value: 50, done: true}
+
+      // 使用场景: 为不具备 Interator 接口的对象提供了遍历操作
+      // 示例 3. 默认对象上是没有 Interator 迭代器的
+      function* GeneratorIte() {
+        for (var k in this) {
+          yield [k, this[k], 1]
+        }
+      }
+      const obj = {
+        name: 'zs',
+        age: 18
+      }
+
+      // 给 obj 创建了一个迭代器  
+      obj[Symbol.iterator] = GeneratorIte
+      // obj就可以使用for of 进行迭代了
+      for (var [k, v, n] of obj) {
+        console.log(k, v, n)
+      }
+    </script>
+  </body>
+</html>

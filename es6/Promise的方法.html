@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. Promise.resolve() 返回一个状态为成功(fulfilled)的 Promise
+      // let p = Promise.resolve('xixixi') // 等同于 p = new Promise(resolve => resolve('xixixi'))
+      // p.then(res => {
+      //   console.log(res)
+      // })
+
+      // 2. Promise.reject() 返回一个状态为失败(rejected)的 Promise
+      // console.log(Promise.reject())
+
+      // 3. Promise.all() 接收一个数组 会等待数组中的所有Promise 对象状态改变  只有全部完成才会进成功的回调  有一个失败就会进失败的回调
+      // 应用场景 初始化时 需要加载 图片  文件  静态资源  等待全部文件加载完成触发的回调， 或者发生错误触发失败回调
+
+      // 4. Promise.race() 同样接受一个 Promise 对象组成的数组 只要数组中有一个 Promise 先执行完成就会结束
+      // 应用场景， 判断请求是否超时， 图片是否超时
+      // 案例
+      // let getImg = new Promise((resolve, reject) => {
+      //   const img = new Image()
+      //   img.src =
+      //     'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic_source%2F53%2F0a%2Fda%2F530adad966630fce548cd408237ff200.jpg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1641094200&t=76020c0b1cd6ce6004af85a075d2add0'
+      //   img.onload = function () {
+      //     resolve(img)
+      //   }
+      // })
+      // let timeoutImg = new Promise((resolve, reject) => {
+      //   setTimeout(() => {
+      //     reject(new Error('图片加载超时'))
+      //   }, 2000)
+      // })
+
+      // Promise.race([getImg, timeoutImg]).then(res => {
+      //   document.body.appendChild(res)
+      // }).catch(err => {
+      //   console.error(err.message)
+      // })
+
+      // .done()   .finally()  无论Promise 状态时成功还是失败  都会进入这两个的回调函数中去
+    </script>
+  </body>
+</html>
