@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.js"></script>
+  </head>
+  <body>
+    <button id="btn1">post按钮</button>
+    <button id="btn2">get按钮</button>
+    <script>
+      document.querySelector('#btn1').onclick = function () {
+        axios
+          .post('http://www.liulongbin.top:3006/api/post', {
+            name: 'zs',
+            age: '18'
+          })
+          .then(res => {
+            console.log(res)
+          })
+      }
+
+      document.getElementById('btn2').onclick = () => {
+        axios
+          .get('http://www.liulongbin.top:3006/api/get', {
+            params: { name: 'zs', age: '18' }
+          })
+          .then(res => {
+            console.log(res)
+          })
+      }
+    </script>
+  </body>
+</html>
